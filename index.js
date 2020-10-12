@@ -27,11 +27,11 @@ function processFirstItem(stringList, callback) {
  * Study the code for counter1 and counter2. Answer the questions below.
  * 
  * 1. What is the difference between counter1 and counter2?
- * 
+ *    [x] counter #1 is a higher order function and contains a function within the function. The counter2 is a callback function? It's smaller and when it changes let count that change is perminant vs. in counter1 that resets every time the function is called.
  * 2. Which of the two uses a closure? How can you tell?
- * 
+ *    [x] 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
- *
+ *    [x] counter1 would be preferable if you wanted to reuse the code. counter2 would be better for simpler and smaller code.
 */
 
 // counter1 code
@@ -56,11 +56,10 @@ function counter2() {
 
 Write a function called `inning` that returns a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
 
-    /*Code Here*/
 
-}
+
+
 
 /* Task 3: finalScore()
 
@@ -75,12 +74,31 @@ finalScore(inning, 9) might return:
 }
 
 */ 
+function inning(){
+  return Math.floor(Math.random() * 3);
+}
+// console.log(inning());
 
-function finalScore(/*code Here*/){
 
-  /*Code Here*/
+
+function finalScore(func, num){
+  const score = {home: 0, away: 0,};
+
+  for(let i = 0; i < num; i++){
+      score.home = score.home + func(); //this is another way of writing (see 3 lines down)
+      score.away += func(); // over here! This line does the same thing but written with a shortcut)
+  }
+  
+  return(score);
 
 }
+console.log(finalScore(inning, 9));
+
+
+
+
+
+
 
 /* Task 4: 
 
@@ -102,9 +120,25 @@ and returns the score at each pont in the game, like so:
 9th inning: awayTeam - homeTeam
 Final Score: awayTeam - homeTeam */
 
+// return a string as follows `Inner 1: awayTeam ${} - homeTeam ${}`;
+// console.log [i]
+// print inning 1
+  // console.log(`Inning ${i}: awayTeam ${score.away} - homeTeam` ${score.home});
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+
+
+function scoreboard(func, num){
+
+  const score = {home: 0, away: 0,};
+
+  for(let i = 0; i < num; i++){
+    score.home = score.home + func(); //this is another way of writing (see 3 lines down)
+    score.away += func(); //this is another way of writing (see 3 lines down)
+    console.log(`Inning #${i+1} awayTeam: ${score.away} - homeTeam ${score.home} `);
+  }
+
+  return(`Final Score: awayTeam: ${score.away} - homeTeam ${score.home} `);
+
 }
 
-
+console.log(scoreboard(inning, 9));
